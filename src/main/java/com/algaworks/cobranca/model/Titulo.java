@@ -1,6 +1,8 @@
 package com.algaworks.cobranca.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,9 +21,11 @@ public class Titulo {
 
     private String descricao;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     private Date dataVencimento;
 
+    @NumberFormat(pattern = "#,##0.00")
     private BigDecimal valor;
 
     @Enumerated(EnumType.STRING)
