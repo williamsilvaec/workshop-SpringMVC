@@ -38,13 +38,17 @@ public class TituloController {
 
         ModelAndView mv = new ModelAndView("CadastroTitulo");
         mv.addObject("mensagem", "Título salvo com sucesso!");
-
         return mv;
     }
 
     @RequestMapping
-    public String pesquisaTitulo(){
-        return "PesquisaTitulos";
+    public ModelAndView pesquisar(){
+
+        List<Titulo> todosTitulos = titulos.findAll(); // esse método findAll() retorna uma lista com todos os títulos
+
+        ModelAndView mv = new ModelAndView("PesquisaTitulos");
+        mv.addObject("titulos", todosTitulos);
+        return mv;
     }
 
     @ModelAttribute("todosStatusTitulo")

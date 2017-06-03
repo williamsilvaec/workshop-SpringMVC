@@ -6,8 +6,8 @@ import lombok.Data;
  * Created by william on 02/06/2017.
  */
 public enum StatusTitulo {
-    RECEBIDO("Pendente"),
-    PENDENTE("Recebido");
+    RECEBIDO("Recebido"),
+    PENDENTE("Pendente");
 
     private String descricao;
 

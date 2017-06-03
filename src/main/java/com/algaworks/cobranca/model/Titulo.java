@@ -31,4 +31,8 @@ public class Titulo {
     @Enumerated(EnumType.STRING)
     private StatusTitulo status;
 
+    public Boolean isPendente() {
+        return StatusTitulo.PENDENTE.equals(this.status);
+    }
+
 }
