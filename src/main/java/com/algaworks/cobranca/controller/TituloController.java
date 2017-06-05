@@ -58,10 +58,7 @@ public class TituloController {
     }
 
     @RequestMapping("{codigo}")
-    public ModelAndView edicao(@PathVariable Long codigo) {
-
-        Titulo titulo = titulos.findOne(codigo);
-
+    public ModelAndView edicao(@PathVariable("codigo") Titulo titulo) {
         ModelAndView mv = new ModelAndView("CadastroTitulo");
         mv.addObject(titulo);
         return mv;
