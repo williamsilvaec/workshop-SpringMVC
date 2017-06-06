@@ -32,7 +32,20 @@ $(function(){
         var botaoReceber = $(event.currentTarget);
         var urlReceber = botaoReceber.attr('href');
 
-        console.log('urlReceber', urlReceber);
+        var resposta = $.ajax({
+            url: urlReceber,
+            type: 'PUT'
+        });
+
+        resposta.done(function (e) {
+            var codigoTitulo = botaoReceber.data('codigo');
+            $('[data-role='+codigoTitulo+']').html('<span class="label label-success">' + e + '</span>');
+            botaoReceber.hide();
+        });
+
+        resposta.fail(function(e) {
+            console.log(e);
+        });
 
     });
 });

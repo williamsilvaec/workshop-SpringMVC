@@ -1,5 +1,6 @@
 package com.algaworks.cobranca.service;
 
+import com.algaworks.cobranca.model.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
 import com.algaworks.cobranca.repository.Titulos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +27,13 @@ public class CadastroTituloService {
     public void excluir(Long codigo) {
         titulos.delete(codigo);
     }
+
+    public String receber(Long codigo) {
+        Titulo titulo = titulos.findOne(codigo);
+        titulo.setStatus(StatusTitulo.RECEBIDO);
+        titulos.save(titulo);
+
+        return StatusTitulo.RECEBIDO.getDescricao();
+    }
+
 }
