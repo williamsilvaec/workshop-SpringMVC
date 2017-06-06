@@ -11,7 +11,7 @@ $('#confirmacaoExclusaoModal').on('show.bs.modal', function (event) {
 
     var modal = $(this);
     var form = modal.find('form'); // seleciona o formulário do modal
-    var action = form.attr('action'); // seleciona o atributo action do formulário
+    var action = form.data('url-base'); // seleciona o atributo url-base do formulário
     if (!action.endsWith('/')) {
         action += '/'; // adiciona '/' se não tiver
     }
