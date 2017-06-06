@@ -7,10 +7,4 @@
         <span th:text="${mensagem}">Titulo salvo com sucesso!!!</span>
     </div>
 
-    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-        <div th:each="detailedErrors : ${#fields.detailedErrors()}">
-            <span th:text="${detailedErrors.message}"></span>
-        </div>
-    </div>
-
 </html>
