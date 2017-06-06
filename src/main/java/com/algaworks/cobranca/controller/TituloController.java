@@ -2,10 +2,9 @@ package com.algaworks.cobranca.controller;
 
 import com.algaworks.cobranca.model.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
-import com.algaworks.cobranca.repository.Titulos;
+import com.algaworks.cobranca.repository.filter.TituloFilter;
 import com.algaworks.cobranca.service.CadastroTituloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -23,8 +22,6 @@ import java.util.List;
 @RequestMapping("/titulos")
 public class TituloController {
 
-    @Autowired
-    private Titulos titulos;
 
     @Autowired
     private CadastroTituloService cadastroTituloService;
@@ -40,9 +37,8 @@ public class TituloController {
     @RequestMapping(method = RequestMethod.POST)
     public String salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {
 
-        if (errors.hasErrors()) {
+        if (errors.hasErrors())
             return "CadastroTitulo";
-        }
 
         try {
             cadastroTituloService.salvar(titulo);
@@ -55,9 +51,9 @@ public class TituloController {
     }
 
     @RequestMapping
-    public ModelAndView pesquisar(){
+    public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro){
 
-        List<Titulo> todosTitulos = titulos.findAll(); // esse método findAll() retorna uma lista com todos os títulos
+        List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro);
 
         ModelAndView mv = new ModelAndView("PesquisaTitulos");
         mv.addObject("titulos", todosTitulos);
@@ -87,7 +83,6 @@ public class TituloController {
 
     @ModelAttribute("todosStatusTitulo")
     public List<StatusTitulo> todosStatusTitulo() {
-
         return Arrays.asList(StatusTitulo.values());
     }
 }
